@@ -1,2 +1,2 @@
 # MySQL-replication-Slave-status-exporter
-golang mysql slave status exporter for prometheus
+Golang MySQL replication Slave status exporter for prometheus
