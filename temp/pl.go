@@ -8,10 +8,13 @@ import (
     "github.com/go-yaml/yaml"
 )
 
+
 type conf struct {
     Username string `yaml:"username"` // важно указывать переменные именно с большой буквы
     Password string `yaml:"password"`
+    Database string `yaml:"database"`
 }
+
 
 func getConf(filename string) (*conf, error) {
     
@@ -29,8 +32,9 @@ func getConf(filename string) (*conf, error) {
     return configs, nil
 }
 
+
 func main() {
-    list, err := getConf("passlog.yaml")
+    list, err := getConf("conf.yaml")
     if err != nil {
         log.Fatal(err)
     }
