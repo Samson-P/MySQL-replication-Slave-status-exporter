@@ -1,0 +1,8 @@
+
+
+
+
+настройки IPTABLES
+	iptables -I INPUT -p tcp --dport 9092 -m state --state NEW -j ACCEPT
+	service iptables save
+	systemctl restart iptables
