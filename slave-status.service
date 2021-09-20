@@ -1,0 +1,16 @@
+[Unit]
+Description=MySQL Replication Status Exporter
+Wants=network.target
+After=network.target
+
+
+[Service]
+User=replication
+Group=replication
+Type=simple
+ExecStart=/usr/local/bin/replication_slave_status_exporter
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target

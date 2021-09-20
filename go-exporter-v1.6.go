@@ -39,7 +39,7 @@ func getConf(filename string) (*conf, error) {
 
 func MySQLSlaveStatus() (map[string]string, error) {
 	// достаем конфиг, читаем данные для авторизации
-	authorization, err := getConf("conf.yaml")
+	authorization, err := getConf("/etc/replication/conf.yaml")
     if err != nil {
         fmt.Println(err)
     }
@@ -118,7 +118,7 @@ func main() {
     }
     
     // лезем в конфиг за портом
-    list, err := getConf("conf.yaml")
+    list, err := getConf("/etc/replication/conf.yaml")
     if err != nil {
         fmt.Println(err)
     }
