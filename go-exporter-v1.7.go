@@ -108,15 +108,24 @@ func main() {
         }
         
         // выделим отдельно те статусы, которые мы обрабатывать пока не будем
-        var ignorStatuses [5]string{"Master_Host", "Master_User", "Master_SSL_Allowed", "Executed_Gtid_Set", "Slave_IO_State", "Master_Log_File", "Slave_IO_Running", "Master_UUID", "Until_Condition", "Retrieved_Gtid_Set", "Relay_Master_Log_File", "Relay_Log_File", "Master_Info_File", "Slave_SQL_Running_State", "Slave_SQL_Running"}
+        ignorStatuses := [16]string{"Master_Host", "Master_User", "Master_SSL_Allowed", "Executed_Gtid_Set", "Slave_IO_State", "Master_Log_File", "Slave_IO_Running", "Master_UUID", "Until_Condition", "Retrieved_Gtid_Set", "Relay_Master_Log_File", "Relay_Log_File", "Master_Info_File", "Slave_SQL_Running_State", "Replicate_Wild_Ignore_Table", "Master_SSL_Verify_Server_Cert"}
+        // Slave_SQL_Running_State	слова
+        // Slave_SQL_Running		yes/no
         // вырезаем все, что не будем обрабатывать
+        slaveSQLRunningState := replicationStatuses["Slave_SQL_Running_State"]
         for _, ignor := range ignorStatuses {
         	delete(replicationStatuses, ignor)
         }
+        if replicationStatuses["Slave_SQL_Running"] == "Yes"{
+        	replicationStatuses["Slave_SQL_Running"] := 1
+        } else {
+        	replicationStatuses["Slave_SQL_Running"] := 0
+        }
         
-        // переменная под текс ответа
-        var responseText string // переменная под текс ответа для prometheus
+        // переменная под текс ответа для prometheus
+        var responseText string
         responseText += fmt.Sprintf("# MySQL replication slave status exporter for Prometheus&Grafana\n")
+        responseText += fmt.Sprintf("# slave SQL running state %s\n", slaveSQLRunningState)
         for status, value := range replicationStatuses {
         	responseText += fmt.Sprintf("mysql_%s{method=\"slave\"} %s\n", status, value)
         }
