@@ -6,3 +6,6 @@ Golang MySQL replication Slave status exporter for prometheus
 
 Проблема, с которой прошлось столкнуться перед принятием решения писать свой exporter:
   mysqld_exporter (github.com/prometheus/mysqld_exporter), к большому удивлению, не собирает метрик по состоянию репликации
+
+
+v2.1 не прошла код-ревью!!
