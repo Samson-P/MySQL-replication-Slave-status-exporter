@@ -1,4 +1,4 @@
 username: replication
 password: strong_passwd
 database: cnc_factory
-port: 9092
+port: 9093
