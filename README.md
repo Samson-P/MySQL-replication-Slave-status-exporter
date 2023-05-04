@@ -1,6 +1,7 @@
 # MySQL Slave replication status exporter
 Golang MySQL Slave replication status exporter for prometheus. Gives database replication metrics to the scraper.
 
+<p align="center"><img src="metrics.png" width=70%/></p>
 
 ## TODO
 * HTTP сервер хостящий страничку с метриками;
